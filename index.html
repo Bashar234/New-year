@@ -197,9 +197,15 @@
       const neonMessage = document.getElementById("neonMessage");
       const messageContainer = document.getElementById("messageContainer");
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Set canvas dimensions
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
 
+      // Star twinkling animation
       function drawStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < 30; i++) {
@@ -217,6 +223,7 @@
         setInterval(drawStars, 200);
       }
 
+      // Fireworks animation
       function fireworks() {
         const fireworkParticles = [];
         const centerX = canvas.width / 2;
@@ -230,7 +237,7 @@
             y: centerY,
             dx: Math.cos(angle) * speed,
             dy: Math.sin(angle) * speed,
-            color: hsl(${Math.random() * 360}, 100%, 50%),
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`, // Correct color format
             life: Math.random() * 150 + 100,
             opacity: 1,
           });
@@ -265,16 +272,16 @@
         animateFireworks();
       }
 
+      // Button actions
       document.getElementById("button2").addEventListener("click", fireworks);
-
       document.getElementById("button3").addEventListener("click", function () {
         neonMessage.style.display = "block";
       });
-
       document.getElementById("button1").addEventListener("click", function () {
         messageContainer.style.display = "block";
       });
 
+      // Start background animation
       startTwinklingStars();
     </script>
   </body>
